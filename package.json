@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:type": "bunx --bun payload generate:types --disable-transpile",
+    "generate:types": "bunx --bun payload generate:types --disable-transpile",
     "db:fresh": "bunx --bun payload migrate:fresh --disable-transpile"
   },
   "dependencies": {

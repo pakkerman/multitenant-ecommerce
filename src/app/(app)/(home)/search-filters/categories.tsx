@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { CustomCategory } from "../types";
 
-import { CategoryDropdown } from "./category-dropdown";
 import { Button } from "@/components/ui/button";
+import { CategoryDropdown } from "./category-dropdown";
 import { ListFilterIcon } from "lucide-react";
+import { CategoriesSidebar } from "./categories-sidebar";
 
 interface Props {
   data: CustomCategory[];
@@ -61,6 +62,12 @@ export const Categories = ({ data }: Props) => {
 
   return (
     <div className="relative w-full">
+      <CategoriesSidebar
+        open={isSidebarOpen}
+        onOpenChange={setIsSidebarOpen}
+        data={data}
+      />
+
       {/* hidden div to measure all items */}
       <div
         ref={measureRef}
@@ -97,6 +104,7 @@ export const Categories = ({ data }: Props) => {
 
         <div ref={viewAllRef} className="shrink-0">
           <Button
+            onClick={() => setIsSidebarOpen(true)}
             className={cn(
               "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
               isActiveCategoryHidden &&

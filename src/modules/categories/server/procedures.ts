@@ -1,7 +1,5 @@
 import { Category } from "@/payload-types";
-
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
-import { CustomCategory } from "@/app/(app)/(home)/types";
 
 export const categoriesRouter = createTRPCRouter({
   getMany: baseProcedure.query(async ({ ctx }) => {
@@ -17,7 +15,7 @@ export const categoriesRouter = createTRPCRouter({
       sort: "name",
     });
 
-    const formattedData: CustomCategory[] = data.docs.map((doc) => ({
+    const formattedData = data.docs.map((doc) => ({
       ...doc,
       subcategories: (doc.subcategories?.docs ?? []).map((doc) => ({
         // 'depth: 1' ensures that the doc type will be "Category"

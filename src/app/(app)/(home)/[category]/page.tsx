@@ -4,7 +4,7 @@ interface Props {
   }>;
 }
 
-// funroad.com/[subcategory]
+// funroad.com/[category]
 
 const Page = async ({ params }: Props) => {
   const { category } = await params;

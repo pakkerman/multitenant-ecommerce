@@ -11,7 +11,7 @@ const Page = async ({ params }: Props) => {
   const { category, subcategory } = await params;
 
   return (
-    <div className="">
+    <div>
       {category}
       <br /> {subcategory}
     </div>

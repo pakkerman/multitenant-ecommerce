@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
-import z from "zod";
+import { z } from "zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,7 +55,6 @@ export const SignUpView = () => {
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
     register.mutate(values);
-    console.log(values);
   };
 
   const username = form.watch("username");
@@ -91,7 +90,7 @@ export const SignUpView = () => {
               </Button>
             </div>
             <h1 className="text-4xl font-medium">
-              Join over thousands of creator earing money on funroad.
+              Join over thousands of creator earning money on funroad.
             </h1>
             <FormField
               name="username"

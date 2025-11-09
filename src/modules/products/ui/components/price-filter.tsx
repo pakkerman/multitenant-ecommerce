@@ -48,7 +48,7 @@ export const PriceFilter = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <div className="flex-col flex gap-2">
         <Label className="font-medium text-base">Maximum price</Label>
         <Input

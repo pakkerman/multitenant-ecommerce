@@ -3,12 +3,12 @@ import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { SearchParams } from "nuqs/server";
 
+import { loadProductFilters } from "@/modules/products/search-params";
 import {
   ProductList,
   ProductListSkeleton,
 } from "@/modules/products/ui/components/product-list";
 import { ProductFilters } from "@/modules/products/ui/components/product-filters";
-import { loadProductFilters } from "@/modules/products/hooks/use-product-filters";
 
 interface Props {
   params: Promise<{ category: string }>;

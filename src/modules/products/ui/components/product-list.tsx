@@ -12,9 +12,10 @@ import { Button } from "@/components/ui/button";
 
 interface Props {
   category?: string;
+  tenantSlug?: string;
 }
 
-export const ProductList = ({ category }: Props) => {
+export const ProductList = ({ category, tenantSlug }: Props) => {
   const [filters] = useProductFilters();
 
   const trpc = useTRPC();
@@ -22,8 +23,9 @@ export const ProductList = ({ category }: Props) => {
     useSuspenseInfiniteQuery(
       trpc.products.getMany.infiniteQueryOptions(
         {
-          category,
           ...filters,
+          category,
+          tenantSlug,
           limit: DEFAULT_LIMIT,
         },
         {
@@ -54,8 +56,8 @@ export const ProductList = ({ category }: Props) => {
               id={product.id}
               name={product.name}
               imageUrl={product.image?.url}
-              authorUsername={product.tenant?.name}
-              authorImageUrl={product.tenant?.image?.url || undefined}
+              tenantSlug={product.tenant?.slug}
+              tenantImageUrl={product.tenant?.image?.url || undefined}
               reviewRating={3}
               reviewCount={5}
               price={product.price}

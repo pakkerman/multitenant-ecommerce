@@ -27,6 +27,11 @@ export const Tenants: CollectionConfig = {
       },
     },
     {
+      name: "image",
+      type: "upload",
+      relationTo: "media",
+    },
+    {
       name: "stripeAccountId",
       type: "text",
       required: true,

@@ -171,6 +171,7 @@ export interface Tenant {
    * Thsi is the subdomain for the store (e.g. [slug].funroad.com)
    */
   slug: string;
+  image?: (string | null) | Media;
   stripeAccountId: string;
   /**
    * You cannot create products until you sumbit your Stripe details
@@ -414,6 +415,7 @@ export interface TagsSelect<T extends boolean = true> {
 export interface TenantsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  image?: T;
   stripeAccountId?: T;
   stripeDetailsSubmitted?: T;
   updatedAt?: T;

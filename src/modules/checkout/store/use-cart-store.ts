@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface TenantCard {
+interface TenantCart {
   productIds: string[];
 }
 
 interface CartState {
-  tenantCarts: Record<string, TenantCard>;
+  tenantCarts: Record<string, TenantCart>;
   addProduct: (tenantSlug: string, productId: string) => void;
   removeProduct: (tenantSlug: string, productId: string) => void;
   clearCart: (tenantSlug: string) => void;

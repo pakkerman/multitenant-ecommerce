@@ -5,7 +5,6 @@ import { useTRPC } from "@/trpc/client";
 import { InboxIcon } from "lucide-react";
 
 import { DEFAULT_LIMIT } from "@/constants";
-import { cn } from "@/lib/utils";
 import { ProductCard, ProductCardSkeleton } from "./product-card";
 import { Button } from "@/components/ui/button";
 
@@ -47,8 +46,8 @@ export const ProductList = () => {
               imageUrl={product.image?.url}
               tenantSlug={product.tenant?.slug}
               tenantImageUrl={product.tenant?.image?.url || undefined}
-              reviewRating={3}
-              reviewCount={5}
+              reviewRating={product.reviewRating}
+              reviewCount={product.reviewCount}
             />
           ))}
       </div>

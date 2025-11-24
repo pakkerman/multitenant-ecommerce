@@ -1,12 +1,12 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { LinkIcon, LoaderIcon, StarIcon } from "lucide-react";
+import { CheckIcon, LinkIcon, LoaderIcon, StarIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { formatCurrency, generateTenantURL } from "@/lib/utils";
@@ -37,6 +37,8 @@ const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
       id: productId,
     }),
   );
+
+  const [isCopied, setIsCopied] = useState(false);
 
   return (
     <div className="px-4 py-10 lg:px-12">
@@ -129,12 +131,21 @@ const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
                     className="size-12"
                     variant="elevated"
                     onClick={() => {
+                      setIsCopied(true);
                       navigator.clipboard.writeText(window.location.href);
                       toast.success("Link copied to clipboard");
+
+                      setTimeout(() => {
+                        setIsCopied(false);
+                      }, 1000);
                     }}
-                    disabled={false}
+                    disabled={isCopied}
                   >
-                    <LinkIcon />
+                    {isCopied ? (
+                      <CheckIcon className="size-6 text-green-700" />
+                    ) : (
+                      <LinkIcon />
+                    )}
                   </Button>
                 </div>
                 <p className="text-center font-medium">

@@ -34,6 +34,13 @@ export const Orders: CollectionConfig = {
       hasMany: false,
     },
     {
+      name: "stripeAccountId",
+      type: "text",
+      admin: {
+        description: "Stripe account asscoiated with this order",
+      },
+    },
+    {
       name: "stripeCheckoutSessionId",
       type: "text",
       required: true,

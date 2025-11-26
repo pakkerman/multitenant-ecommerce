@@ -6,6 +6,7 @@ import { Sort, Where } from "payload";
 
 import { DEFAULT_LIMIT } from "@/constants";
 import { sortValues } from "../search-params";
+import { TRPCError } from "@trpc/server";
 
 export const productsRouter = createTRPCRouter({
   getOne: baseProcedure
@@ -48,6 +49,13 @@ export const productsRouter = createTRPCRouter({
             ],
           },
         });
+
+        if (product.isArchived) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Product not found",
+          });
+        }
 
         isPurchased = ordersData.totalDocs > 0;
       }

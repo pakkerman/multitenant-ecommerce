@@ -189,4 +189,21 @@ const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
   );
 };
 
+export const ProductViewSkeleton = () => {
+  return (
+    <div className="px-4 py-10 lg:px-12">
+      <div className="overflow-hidden rounded-sm border bg-white">
+        <div className="relative aspect-[3.9]">
+          <Image
+            src={"/auth-bg.png"}
+            alt="placeholder"
+            fill
+            className="object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default ProductView;

@@ -21,7 +21,8 @@ import { StarPicker } from "@/components/star-picker";
 
 interface Props {
   productId: string;
-  initialData?: ReviewGetOneOutput;
+  initialData: ReviewGetOneOutput | null;
+  children: string;
 }
 
 const formSchema = z.object({
@@ -160,5 +161,29 @@ export const ReviewForm = ({ productId, initialData }: Props) => {
         </Button>
       )}
     </Form>
+  );
+};
+
+export const ReviewFormSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-y-4">
+      <p className="font-medium">Liked it? Give it a rating</p>
+      <StarPicker disabled />
+
+      <Textarea
+        placeholder="Want to leave a written review?"
+        disabled
+        className="disabled:cursor-auto"
+      />
+      <Button
+        type="button"
+        disabled
+        variant="elevated"
+        size="lg"
+        className="w-fit bg-black text-white hover:bg-pink-400 hover:text-primary"
+      >
+        Post review
+      </Button>
+    </div>
   );
 };

@@ -12,7 +12,7 @@ const Page = () => {
       onSuccess: (data) => {
         window.location.href = data.url;
       },
-      onError: (data) => {
+      onError: () => {
         window.location.href = "/";
       },
     }),

@@ -7,10 +7,7 @@ import dynamic from "next/dynamic";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { CheckIcon, LinkIcon, LoaderIcon, StarIcon } from "lucide-react";
-import {
-  defaultJSXConverters,
-  RichText,
-} from "@payloadcms/richtext-lexical/react";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import { toast } from "sonner";
 
 import { formatCurrency, generateTenantURL } from "@/lib/utils";

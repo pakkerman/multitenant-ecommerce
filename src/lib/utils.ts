@@ -15,7 +15,7 @@ export function generateTenantURL(tenantSlug: string) {
 
   // use subdomain routing in production
   // example: https://pakkerman.funroad.com
-  return `${protocol}://${tenantSlug}.${domain}/`;
+  return `${protocol}://${tenantSlug}.${domain}`;
 }
 
 export function formatCurrency(value: number | string) {

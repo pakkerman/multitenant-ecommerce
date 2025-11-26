@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { LoaderIcon, ShoppingCartIcon } from "lucide-react";
+import { LoaderIcon } from "lucide-react";
 
 import { generateTenantURL } from "@/lib/utils";
 import dynamic from "next/dynamic";

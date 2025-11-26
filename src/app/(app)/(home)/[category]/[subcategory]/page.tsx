@@ -16,6 +16,8 @@ interface Props {
 
 // funroad.com/[category]/[subcategory]
 
+export const dynamic = "force-dynamic";
+
 const Page = async ({ params, searchParams }: Props) => {
   const { subcategory } = await params;
   const filters = await loadProductFilters(searchParams);

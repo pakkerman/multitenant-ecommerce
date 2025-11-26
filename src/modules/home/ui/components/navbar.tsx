@@ -82,7 +82,7 @@ export const Navbar = () => {
       <div className="hidden lg:flex">
         {session.data?.user ? (
           <div className="flex items-center justify-center border-l border-black px-12 text-lg ">
-            <p>{session.data?.user.username}'s shop</p>
+            <p>{session.data?.user.username}&apos;s shop</p>
           </div>
         ) : (
           <Button

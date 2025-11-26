@@ -84,5 +84,15 @@ export const Products: CollectionConfig = {
           "If checked, this product will no longer be able to be purchased",
       },
     },
+    {
+      name: "isPrivate",
+      type: "checkbox",
+      label: "Private",
+      defaultValue: false,
+      admin: {
+        description:
+          "If checked, this product will not be shown on the public store front",
+      },
+    },
   ],
 };

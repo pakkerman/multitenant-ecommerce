@@ -7,6 +7,10 @@ import dynamic from "next/dynamic";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { CheckIcon, LinkIcon, LoaderIcon, StarIcon } from "lucide-react";
+import {
+  defaultJSXConverters,
+  RichText,
+} from "@payloadcms/richtext-lexical/react";
 import { toast } from "sonner";
 
 import { formatCurrency, generateTenantURL } from "@/lib/utils";
@@ -109,7 +113,7 @@ const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
             </div>
             <div className="p-6">
               {data.description ? (
-                <p className="">{data.description}</p>
+                <RichText data={data.description} />
               ) : (
                 <p className="font-medium text-muted-foreground italic">
                   No description provided.

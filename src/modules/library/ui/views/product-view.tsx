@@ -6,6 +6,7 @@ import { useTRPC } from "@/trpc/client";
 
 import { ArrowLeftIcon } from "lucide-react";
 import { ReviewSidebar } from "./review-sidebar";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
 interface Props {
   productId: string;
@@ -44,7 +45,7 @@ export const ProductView = ({ productId }: Props) => {
 
           <div className="lg:col-span-5">
             {data.content ? (
-              <p>{data.content}</p>
+              <RichText data={data.content} />
             ) : (
               <p className="italic font-medium text-muted-foreground">
                 No Special Content

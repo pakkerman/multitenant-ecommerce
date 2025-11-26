@@ -234,7 +234,21 @@ export interface Product {
   id: string;
   tenant?: (string | null) | Tenant;
   name: string;
-  description?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * Price in USD
    */
@@ -247,7 +261,21 @@ export interface Product {
   /**
    * Protected content only visible to customers after purchase. Add products documentation, downloadable files getting started guides, and bonus materials. Support Makrdown formatting
    */
-  content?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * If checked, this product will no longer be able to be purchased
    */

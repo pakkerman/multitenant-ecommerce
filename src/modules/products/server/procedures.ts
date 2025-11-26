@@ -6,6 +6,7 @@ import { Sort, Where } from "payload";
 
 import { DEFAULT_LIMIT } from "@/constants";
 import { sortValues } from "../search-params";
+import { TRPCError } from "@trpc/server";
 
 export const productsRouter = createTRPCRouter({
   getOne: baseProcedure
@@ -48,6 +49,13 @@ export const productsRouter = createTRPCRouter({
             ],
           },
         });
+
+        if (product.isArchived) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Product not found",
+          });
+        }
 
         isPurchased = ordersData.totalDocs > 0;
       }
@@ -121,7 +129,11 @@ export const productsRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      const where: Where = {};
+      const where: Where = {
+        isArchived: {
+          not_equals: true,
+        },
+      };
       let sort: Sort;
 
       switch (input.sort) {
@@ -148,6 +160,13 @@ export const productsRouter = createTRPCRouter({
       if (input.tenantSlug) {
         where["tenant.slug"] = {
           equals: input.tenantSlug,
+        };
+      } else {
+        // if loading products for public store front (with no tenantSlug)
+        // not to load `isPrivate` set products
+        // these products are exclusively privated to only shown on tenant store
+        where["isPrivate"] = {
+          not_equals: true,
         };
       }
 

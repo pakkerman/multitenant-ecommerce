@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Poppins } from "next/font/google";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { MenuIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import { useTRPC } from "@/trpc/client";
-import { MenuIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { NavbarSidebar } from "./navbar-sidebar";
 
@@ -80,17 +79,12 @@ export const Navbar = () => {
         ))}
       </div>
 
-      {session.data?.user ? (
-        <div className="hidden lg:flex">
-          <Button
-            asChild
-            className="h-full rounded-none border-t-0 border-r-0 border-b-0 border-l bg-black px-12 text-lg  text-white transition-colors hover:text-black hover:bg-pink-400"
-          >
-            <Link href="/admin">Dashboard</Link>
-          </Button>
-        </div>
-      ) : (
-        <div className="hidden lg:flex">
+      <div className="hidden lg:flex">
+        {session.data?.user ? (
+          <div className="flex items-center justify-center border-l border-black px-12 text-lg ">
+            <p>{session.data?.user.username}'s shop</p>
+          </div>
+        ) : (
           <Button
             asChild
             variant="secondary"
@@ -100,18 +94,22 @@ export const Navbar = () => {
               Login
             </Link>
           </Button>
-          <Button
-            asChild
-            className="h-full rounded-none border-t-0 border-r-0 border-b-0 border-l bg-black px-12 text-lg  text-white transition-colors hover:text-black hover:bg-pink-400"
-          >
+        )}
+        <Button
+          asChild
+          className="h-full rounded-none border-t-0 border-r-0 border-b-0 border-l bg-black px-12 text-lg  text-white transition-colors hover:bg-pink-400 hover:text-black"
+        >
+          {session.data?.user ? (
+            <Link href="/admin">Dashboard</Link>
+          ) : (
             <Link prefetch href="/sign-up">
               Start Selling
             </Link>
-          </Button>
-        </div>
-      )}
+          )}
+        </Button>
+      </div>
 
-      <div className="flex lg:hidden items-center justify-center">
+      <div className="flex items-center justify-center lg:hidden">
         <Button
           variant="ghost"
           className="size-12 border-transparent bg-white"

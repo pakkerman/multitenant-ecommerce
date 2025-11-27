@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -29,7 +30,7 @@ const NavbarItem = ({ href, children, isActive }: NavItemProps) => {
       asChild
       variant="outline"
       className={cn(
-        "bg-transparent hover:bg-transparent rounded-full hover:border-primary border-transparent px-3.5 text-lg",
+        "bg-transparent hover:bg-transparent rounded-full hover:border-primary border-transparent px-3.5 lg:text-lg text-md",
         isActive && "bg-black text-white hover:bg-black hover:text-white",
       )}
     >
@@ -54,8 +55,11 @@ export const Navbar = () => {
   const session = useQuery(trpc.auth.session.queryOptions());
 
   return (
-    <nav className="flex h-20 justify-between border-b bg-white font-medium">
-      <Link href="/" className="flex items-center pl-6">
+    <nav className="flex h-20 justify-between border-b-4 bg-white font-medium">
+      <Link
+        href="/"
+        className="flex max-w-min items-center pl-6 lg:max-w-none lg:flex-1"
+      >
         <span className={cn("text-5xl font-semibold", poppins.className)}>
           funroad
         </span>
@@ -67,7 +71,7 @@ export const Navbar = () => {
         onOpenChange={setIsSidebarOpen}
       />
 
-      <div className="hidden items-center gap-4 lg:flex">
+      <div className="hidden items-center justify-center gap-4 px-6 lg:flex lg:flex-1">
         {navbarItems.map((item) => (
           <NavbarItem
             key={item.href}
@@ -79,16 +83,23 @@ export const Navbar = () => {
         ))}
       </div>
 
-      <div className="hidden lg:flex">
+      <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center gap-2 pr-4">
         {session.data?.user ? (
-          <div className="flex items-center justify-center border-l border-black px-12 text-lg ">
-            <p>{session.data?.user.username}&apos;s shop</p>
+          <div className="flex items-center h-full justify-center gap-4 border-l-4 border-black px-8 text-lg ">
+            <Image
+              src={"/auth-bg.png"}
+              alt="profile picture"
+              width={32}
+              height={32}
+              className="size-8 shrink-0 rounded-full border"
+            />
+            <p>{session.data?.user.username}</p>
           </div>
         ) : (
           <Button
             asChild
-            variant="secondary"
-            className="h-full rounded-none border-t-0 border-r-0 border-b-0 border-l bg-white px-12 text-lg transition-colors hover:bg-pink-400"
+            variant="elevatedReversed"
+            className="rounded-none border-2 bg-white px-12 text-lg transition-colors hover:bg-pink-400"
           >
             <Link prefetch href="/sign-in">
               Login
@@ -97,7 +108,8 @@ export const Navbar = () => {
         )}
         <Button
           asChild
-          className="h-full rounded-none border-t-0 border-r-0 border-b-0 border-l bg-black px-12 text-lg  text-white transition-colors hover:bg-pink-400 hover:text-black"
+          variant="elevatedReversed"
+          className="rounded-none border-white border-2 bg-cyan-400 px-12 text-lg text-black transition-colors hover:bg-pink-400 hover:text-black"
         >
           {session.data?.user ? (
             <Link href="/admin">Dashboard</Link>
@@ -111,7 +123,7 @@ export const Navbar = () => {
 
       <div className="flex items-center justify-center lg:hidden">
         <Button
-          variant="ghost"
+          variant="elevatedReversed"
           className="size-12 border-transparent bg-white"
           onClick={() => setIsSidebarOpen(true)}
         >

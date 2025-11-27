@@ -70,11 +70,11 @@ export const Categories = ({ data }: Props) => {
       {/* hidden div to measure all items */}
       <div
         ref={measureRef}
-        className="pointer-events-none absolute flex opacity-0"
+        className="pointer-events-none absolute flex opacity-0 gap-2"
         style={{ position: "fixed", top: -9999, left: -9999 }}
       >
         {data.map((category) => (
-          <div key={category.id} className="">
+          <div key={category.id} className="gap-4">
             <CategoryDropdown
               category={category}
               isActive={activeCategory === category.slug}
@@ -89,7 +89,7 @@ export const Categories = ({ data }: Props) => {
         ref={containerRef}
         onMouseEnter={() => setIsAnyHovered(true)}
         onMouseLeave={() => setIsAnyHovered(false)}
-        className="flex flex-nowrap items-center"
+        className="flex flex-nowrap items-center gap-2"
       >
         {/* TODO: Harcode "All" button */}
 

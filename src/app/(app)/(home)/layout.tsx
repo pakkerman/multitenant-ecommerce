@@ -25,7 +25,17 @@ const Layout = async ({ children }: Props) => {
           <SearchFilters />
         </Suspense>
       </HydrationBoundary>
-      <div className="flex-1 bg-[#f4f4f0]">{children}</div>
+
+      <div
+        className="flex-1 "
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg,#8080804d 1px,#0000 0),linear-gradient(#80808090 1px,#0000 0)",
+          backgroundSize: "40px 40px",
+        }}
+      >
+        {children}
+      </div>
       <Footer />
     </div>
   );

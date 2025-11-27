@@ -40,7 +40,7 @@ export const ProductList = ({ category, tenantSlug, narrowView }: Props) => {
 
   if (data.pages?.[0]?.docs.length === 0) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-y-4 rounded-lg border border-dashed border-black bg-white p-8">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-y-4 rounded-lg border-2 border-dashed border-black bg-white p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
         <InboxIcon />
         <p className="text-base font-medium">No products found</p>
       </div>

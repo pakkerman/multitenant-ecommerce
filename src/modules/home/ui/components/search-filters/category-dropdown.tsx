@@ -50,13 +50,16 @@ export const CategoryDropdown = ({
         <Button
           variant="elevatedReversed"
           className={cn(
-            "h-11 px-4 bg-transparent border-transparent rounded-full text-black hover:bg-white hover:border-primary",
+            "border-2 h-11 px-4 bg-transparent border-transparent rounded-full text-black hover:bg-white hover:border-primary",
             isActive &&
               !isNavigationHovered &&
               "bg-white border-primary shadow-none translate-0",
             isOpen && "bg-white border-primary shadow-none translate-0",
           )}
-          style={{ backgroundColor: category.color || "white" }}
+          style={{
+            backgroundColor: category.color || "#4A5565",
+            color: category.color ? "black" : "white",
+          }}
         >
           <Link href={`/${category.slug === "all" ? "" : category.slug}`}>
             {category.name}

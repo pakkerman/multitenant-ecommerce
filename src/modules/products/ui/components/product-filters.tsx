@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { useProductFilters } from "../../hooks/use-product-filters";
 import { PriceFilter } from "./price-filter";
 import { TagsFilter } from "./tags-filter";
@@ -59,7 +59,7 @@ export const ProductFilters = () => {
   };
 
   return (
-    <div className="rounded-md border bg-white">
+    <div className="rounded-md border-2 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ">
       <div className="flex items-center justify-between border-b p-4">
         <p className="font-medium">Filters</p>
         {hasFilters && (

@@ -21,9 +21,11 @@ export const Categories = ({ data }: Props) => {
   const measureRef = useRef<HTMLDivElement>(null);
   const viewAllRef = useRef<HTMLDivElement>(null);
 
+  const [offsetCount, setOffsetCount] = useState(0);
   const [visibleCount, setVisibleCount] = useState(data.length);
   const [isAnyHovered, setIsAnyHovered] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [leftoverWidth, setLeftoverWidth] = useState(0);
 
   const categoryParam = params.category as string | undefined;
   const activeCategory = categoryParam || "all";
@@ -32,31 +34,36 @@ export const Categories = ({ data }: Props) => {
   const isActiveCategoryHidden =
     activeCategoryIdx >= visibleCount && activeCategoryIdx !== -1;
 
+  const calculateVisible = () => {
+    if (!containerRef.current || !measureRef.current || !viewAllRef.current)
+      return;
+
+    const containerWidth = containerRef.current.offsetWidth;
+    const viewAllWidth = viewAllRef.current.offsetWidth;
+    const availableWidth = containerWidth - viewAllWidth;
+
+    const items = Array.from(measureRef.current.children);
+    let totalWidth = 0;
+    let visible = 0;
+
+    for (const item of items) {
+      const width = Math.ceil(item.getBoundingClientRect().width);
+
+      if (totalWidth + width > availableWidth) break;
+
+      totalWidth += width + 16; // +16px for gaps
+      visible++;
+    }
+
+    setVisibleCount(visible);
+    setLeftoverWidth(containerWidth - totalWidth);
+  };
+
   useEffect(() => {
-    const calculateVisible = () => {
-      if (!containerRef.current || !measureRef.current || !viewAllRef.current)
-        return;
+    calculateVisible();
+  }, [offsetCount]);
 
-      const containerWidth = containerRef.current.offsetWidth;
-      const viewAllWidth = viewAllRef.current.offsetWidth;
-      const availableWidth = containerWidth - viewAllWidth;
-
-      const items = Array.from(measureRef.current.children);
-      let totalWidth = 0;
-      let visible = 0;
-
-      for (const item of items) {
-        const width = item.getBoundingClientRect().width;
-
-        if (totalWidth + width > availableWidth) break;
-
-        totalWidth += width;
-        visible++;
-      }
-
-      setVisibleCount(visible);
-    };
-
+  useEffect(() => {
     const resizeObserver = new ResizeObserver(calculateVisible);
     resizeObserver.observe(containerRef.current!);
 
@@ -73,8 +80,8 @@ export const Categories = ({ data }: Props) => {
         className="pointer-events-none absolute flex opacity-0 gap-2"
         style={{ position: "fixed", top: -9999, left: -9999 }}
       >
-        {data.map((category) => (
-          <div key={category.id} className="gap-4">
+        {data.slice(offsetCount).map((category) => (
+          <div key={category.id}>
             <CategoryDropdown
               category={category}
               isActive={activeCategory === category.slug}
@@ -83,18 +90,17 @@ export const Categories = ({ data }: Props) => {
           </div>
         ))}
       </div>
-
       {/* visible items */}
       <div
         ref={containerRef}
         onMouseEnter={() => setIsAnyHovered(true)}
         onMouseLeave={() => setIsAnyHovered(false)}
-        className="flex flex-nowrap items-center gap-2"
+        className="flex flex-nowrap items-center gap-2 justify-start"
       >
         {/* TODO: Harcode "All" button */}
 
-        {data.slice(0, visibleCount).map((category) => (
-          <div key={category.id} className="">
+        {data.slice(offsetCount, offsetCount + visibleCount).map((category) => (
+          <div key={category.id}>
             <CategoryDropdown
               category={category}
               isActive={activeCategory === category.slug}
@@ -103,6 +109,21 @@ export const Categories = ({ data }: Props) => {
           </div>
         ))}
 
+        {offsetCount + visibleCount < data.length ? (
+          <Button
+            variant="elevatedReversed"
+            className="h-11 px-4 bg-fuchsia-400/60 text-black"
+            style={{ width: leftoverWidth - 32 }}
+            onClick={() => {
+              setOffsetCount(visibleCount);
+              setVisibleCount(data.length);
+            }}
+          >
+            ... {data.length - visibleCount} more
+          </Button>
+        ) : (
+          <div style={{ width: leftoverWidth - 32 }} />
+        )}
         <div ref={viewAllRef} className="shrink-0">
           <Button
             variant="elevated"

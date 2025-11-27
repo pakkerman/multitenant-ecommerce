@@ -17,8 +17,8 @@ export const ProductListView = ({
 }: Props) => {
   return (
     <div className="flex flex-col gap-4 px-4 py-8 lg:px-12 ">
-      <div className="flex flex-col lg:flex-row lg:items-center gap-y-2 lg:gap-y-0 justify-between">
-        <p className="text-2xl font-medium">Curated for you</p>
+      <div className="flex flex-col justify-between gap-y-2 border-2 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:flex-row lg:items-center lg:gap-y-0">
+        <p className="px-4 text-2xl  font-medium">Curated for you</p>
         <ProductSort />
       </div>
       <div className="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-6 xl:grid-cols-8">

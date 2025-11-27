@@ -26,7 +26,7 @@ export const SearchInput = ({ disabled }: Props) => {
       <div className="relative w-full">
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-500" />
         <Input
-          className="pl-8"
+          className="pl-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-y-1 -translate-x-1"
           placeholder="Search products"
           disabled={disabled}
         />
@@ -40,7 +40,7 @@ export const SearchInput = ({ disabled }: Props) => {
       </Button>
 
       {session.data?.user && (
-        <Button asChild variant="elevated">
+        <Button asChild className="bg-emerald-400" variant="elevatedReversed">
           <Link prefetch href="/library">
             <BookmarkCheckIcon />
             Library

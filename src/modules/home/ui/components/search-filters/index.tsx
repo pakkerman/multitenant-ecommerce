@@ -32,7 +32,7 @@ export const SearchFilters = () => {
 
   return (
     <div
-      className="flex w-full flex-col gap-4 border-b px-4 py-8 lg:px-12"
+      className="flex w-full flex-col gap-4 border-b-4 px-4 py-8 lg:px-12"
       style={{
         backgroundColor: `${activeCategoryColor}bb`,
       }}
@@ -53,7 +53,7 @@ export const SearchFilters = () => {
 export const SearchFiltersSkeleton = () => {
   return (
     <div
-      className="flex w-full flex-col gap-4 border-b px-4 py-8 lg:px-12"
+      className="flex w-full flex-col gap-4 border-b-4 px-4 py-8 lg:px-12"
       style={{ backgroundColor: "#f5f5f5" }}
     >
       <SearchInput disabled />
